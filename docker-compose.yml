@@ -1,0 +1,11 @@
+version: '2.1'
+
+volumes:
+  pihole_config:
+  dnsmasq_config:
+
+services:
+  pihole:
+    build: ./route
+    privileged: true
+    network_mode: host
