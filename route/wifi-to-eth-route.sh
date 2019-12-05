@@ -35,7 +35,7 @@ ip route del 0/0 dev $ethUSB &> /dev/null
 
 echo -e "interface=$ethUSB\n\
 bind-interfaces\n\
-server=8.8.8.8\n\
+server=127.0.0.1\n\
 domain-needed\n\
 bogus-priv\n\
 dhcp-range=$dhcp_range_start,$dhcp_range_end,$dhcp_time" > /etc/dnsmasq.d/custom-dnsmasq.conf
