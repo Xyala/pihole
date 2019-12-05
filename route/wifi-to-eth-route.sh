@@ -33,6 +33,14 @@ ifconfig $ethUSB $ip_address netmask $netmask
 # Remove default route created by dhcpcd
 ip route del 0/0 dev $ethUSB &> /dev/null
 
+#to remove if using pihole DHCP...
+echo -e "interface=$ethUSB\n\
+bind-interfaces\n\
+server=127.0.0.1\n\
+domain-needed\n\
+bogus-priv\n\
+dhcp-range=$dhcp_range_start,$dhcp_range_end,$dhcp_time" > /etc/dnsmasq.d/custom-dnsmasq.conf
 
+systemctl restart dnsmasq
 
 while : ; do echo "Idling ... "; sleep 600; done
