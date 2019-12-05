@@ -17,8 +17,8 @@ netmask="255.255.255.0"
 dhcp_range_start="192.168.2.2"
 dhcp_range_end="192.168.2.100"
 dhcp_time="12h"
-eth="eth0"
-wlan="wlan0"
+eth="eth1"
+wlan="eth0"
 
 iptables -t nat -A POSTROUTING -o $wlan -j MASQUERADE
 iptables -A FORWARD -i $wlan -o $eth -m state --state RELATED,ESTABLISHED -j ACCEPT
