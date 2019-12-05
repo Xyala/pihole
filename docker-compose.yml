@@ -5,7 +5,26 @@ volumes:
   dnsmasq_config:
 
 services:
-  pihole:
+  route:
     build: ./route
     privileged: true
     network_mode: host
+
+  pihole:
+    build: ./pihole
+    privileged: true
+    volumes:
+      - 'pihole_config:/etc/pihole'
+      - 'dnsmasq_config:/etc/dnsmasq.d'
+    cap_add:
+      - 'NET_ADMIN'
+    dns:
+      - '127.0.0.1'
+      - '1.1.1.1'
+    network_mode: host
+
+  # set pihole DNS1 and DNS2 service variables to 127.0.0.1#5053 to use dnscrypt-proxy for upstream DNS
+  dnscrypt-proxy:
+    build: ./dnscrypt-proxy
+    ports:
+      - '5053:5053/udp'
